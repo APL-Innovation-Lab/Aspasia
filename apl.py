@@ -268,18 +268,6 @@ if choose == 'Knowledge Builder':
                 on_click=resource_clicked(prompt,st.session_state.resources['resource'][2],st.session_state.org)
                 )
 
-    if st.session_state.knowledge_breakdown != '':
-        with st.expander("**Start A Learning Cycle?**"):
-            st.write("Continue learning with a curated three-day series of AI-generated emails to help you build a habit and strengthen retention!")
-            email = st.text_input("Enter email")
-            topic = st.text_input("Enter topic", value="I want to learn about: "+st.session_state.knowledge_prompt)
-            if st.button("Begin Learning Cycle"):
-                if email:
-                    requests.post("https://hooks.zapier.com/hooks/catch/8373893/3sm4sak/",json={'details':{'email':email, 'prompt':topic}})
-                    st.success("The email entered will receive the first lesson shortly!")
-                else:
-                    st.error("Please enter an email.")
-
         text = "# Aspasia Knowledge Builer: "+st.session_state.knowledge_prompt+"\n\n"
         text += "## Summary\n\n"
         text += st.session_state.knowledge_summary+'\n\n'
@@ -479,17 +467,6 @@ if choose == 'AspasiaGPT: Your Tutor & Guide':
 
         #SPECIAL ACTIONS: LEARNING CYCLES AND PDF DOWNLOAD
         with st.expander("**Actions**"):
-            st.markdown("#### Start a learning cycle...")
-            st.write("Continue learning with a curated three-day series of AI-generated emails to help you build a habit and strengthen retention!")
-            email = st.text_input("Enter email")
-            topic = st.text_input("Enter topic", value="I want to learn about: "+st.session_state.knowledge_prompt)
-            if st.button("Begin Learning Cycle"):
-                if email:
-                    requests.post("https://hooks.zapier.com/hooks/catch/8373893/3sm4sak/",json={'details':{'email':email, 'prompt':topic}})
-                    st.success("The email entered will receive the first lesson shortly!")
-                else:
-                    st.error("Please enter an email.")
-
             text = "# AspasiaGPT Tutoring Thread\n\n"
             for i in range(len(st.session_state.messages)):
                 if st.session_state.messages[i]["role"] != "system":
